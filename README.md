@@ -18,5 +18,5 @@
 - [ ] Integração com Sentry
 - [x] CI/CD
 - [ ] Responsividade (celular e tablet)
-- [ ] Qualidade de código (Sonarqube)
+- [x] Qualidade de código (Sonarqube)
 - [ ] PWA
