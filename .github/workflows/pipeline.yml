@@ -6,23 +6,23 @@ on:
             - "**"
 
 jobs:
-    # lint:
-    #     runs-on: ubuntu-latest
+    lint:
+        runs-on: ubuntu-latest
 
-    #     steps:
-    #         - name: Checkout code
-    #           uses: actions/checkout@v3
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
 
-    #         - name: Set up Node.js
-    #           uses: actions/setup-node@v3
-    #           with:
-    #               node-version: "18.18.0"
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "18.18.0"
 
-    #         - name: Install dependencies
-    #           run: yarn
+            - name: Install dependencies
+              run: yarn
 
-    #         - name: Run lint:fix
-    #           run: yarn lint:fix
+            - name: Run lint:fix
+              run: yarn lint:fix
 
     sonarqube:
         runs-on: ubuntu-latest
@@ -49,3 +49,4 @@ jobs:
                     -Dsonar.sources=src \
                     -Dsonar.host.url=https://sonarcloud.io \
                     -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+                    -Dsonar.qualitygate.wait=true
