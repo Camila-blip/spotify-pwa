@@ -1,9 +1,14 @@
+import typescriptEslintPlugin from "@typescript-eslint/eslint-plugin";
+import typescriptEslintParser from "@typescript-eslint/parser";
+import reactPlugin from "eslint-plugin-react";
+
 export default [
     {
         files: ["**/*.{js,jsx,ts,tsx}"],
         languageOptions: {
             ecmaVersion: "latest",
             sourceType: "module",
+            parser: typescriptEslintParser,
             globals: {
                 browser: true,
                 es2021: true,
@@ -11,8 +16,8 @@ export default [
             }
         },
         plugins: {
-            "@typescript-eslint": require("@typescript-eslint/eslint-plugin"),
-            react: require("eslint-plugin-react")
+            "@typescript-eslint": typescriptEslintPlugin,
+            react: reactPlugin
         },
         rules: {
             "react/jsx-filename-extension": [
