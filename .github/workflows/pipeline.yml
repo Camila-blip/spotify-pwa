@@ -45,8 +45,8 @@ jobs:
               run: |
                   npx sonarqube-scanner \
                     -Dsonar.projectKey=spotify-pwa \
-                    -Dsonar.organization=Camila-blip \
+                    -Dsonar.organization=camila-blip \
                     -Dsonar.sources=src \
                     -Dsonar.host.url=https://sonarcloud.io \
-                    -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-                                -Dsonar.branch.name=${{ github.ref_name }}
+                    -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+                    -Dsonar.branch.name=${{ github.ref_name }}
