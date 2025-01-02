@@ -2,7 +2,7 @@
 
 ## Requisitos obrigatórios
 
-- [ ] Seguimentação de commits
+- [x] Seguimentação de commits
 - [x] Lint
 - [ ] Autenticação via Spotify
 - [ ] Listar artistas
