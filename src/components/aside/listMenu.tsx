@@ -1,29 +1,29 @@
-import { ReactElement, useId } from "react";
+import { ReactElement } from "react";
 import { Home, User, Disc, Play } from "assets/icons";
 type typeListMenu = {
-    id: string;
     icon: ReactElement;
     title: string;
+    url: string;
 };
 export const listMenu: typeListMenu[] = [
     {
-        id: useId(),
         icon: <Home />,
-        title: "Home"
+        title: "Home",
+        url: "home"
     },
     {
-        id: useId(),
         icon: <Disc />,
-        title: "Artistas"
+        title: "Artistas",
+        url: "artists"
     },
     {
-        id: useId(),
         icon: <Play />,
-        title: "Artistas"
+        title: "Playlists",
+        url: "playlists"
     },
     {
-        id: useId(),
         icon: <User />,
-        title: "Perfil"
+        title: "Perfil",
+        url: "profile"
     }
 ];

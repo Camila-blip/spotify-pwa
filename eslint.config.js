@@ -29,7 +29,7 @@ export default [
             quotes: ["error", "double"],
             semi: ["error", "always"],
             "react/prop-types": "off",
-            "@typescript-eslint/no-explicit-any": "off",
+            "@typescript-eslint/no-explicit-any": "error",
             "react/no-unknown-property": "off",
             "react/display-name": "off",
             "react/no-unescaped-entities": "off",
