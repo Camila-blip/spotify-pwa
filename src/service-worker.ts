@@ -1,17 +1,10 @@
 /// <reference lib="webworker" />
 
-// This service worker can be customized!
-// See https://developers.google.com/web/tools/workbox/modules
-// for the list of available Workbox modules, or add any other
-// code you'd like.
-// You can also remove this file if you'd prefer not to use a
-// service worker, and the Workbox build step will be skipped.
-
 import { clientsClaim } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
 import { precacheAndRoute, createHandlerBoundToURL } from "workbox-precaching";
 import { registerRoute } from "workbox-routing";
-import { StaleWhileRevalidate } from "workbox-strategies";
+import { StaleWhileRevalidate, CacheFirst } from "workbox-strategies";
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -61,20 +54,43 @@ registerRoute(
     // Customize this strategy as needed, e.g., by changing to CacheFirst.
     new StaleWhileRevalidate({
         cacheName: "images",
+        plugins: [new ExpirationPlugin({ maxEntries: 50 })]
+    })
+);
+
+// Cache CSS and JavaScript files with a CacheFirst strategy
+registerRoute(
+    ({ request }) =>
+        request.destination === "style" ||
+        request.destination === "script" ||
+        request.destination === "worker",
+    new CacheFirst({
+        cacheName: "static-resources",
         plugins: [
-            // Ensure that once this runtime cache reaches a maximum size the
-            // least-recently used images are removed.
-            new ExpirationPlugin({ maxEntries: 50 })
+            new ExpirationPlugin({
+                maxEntries: 50,
+                maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
+            })
         ]
     })
 );
 
-// This allows the web app to trigger skipWaiting via
-// registration.waiting.postMessage({type: 'SKIP_WAITING'})
+// Cache API responses with a StaleWhileRevalidate strategy
+registerRoute(
+    ({ url }) => url.origin === "https://api.spotify.com",
+    new StaleWhileRevalidate({
+        cacheName: "api-responses",
+        plugins: [
+            new ExpirationPlugin({
+                maxEntries: 50,
+                maxAgeSeconds: 24 * 60 * 60 // 1 day
+            })
+        ]
+    })
+);
+
 self.addEventListener("message", (event) => {
     if (event.data && event.data.type === "SKIP_WAITING") {
         self.skipWaiting();
     }
 });
-
-// Any other custom service worker logic can go here.

@@ -5,3 +5,8 @@ export const Main = styled.main`
     flex-direction: row;
     height: 100vh;
 `;
+
+export const Container = styled.div`
+    padding: 40px;
+    width: 100%;
+`;

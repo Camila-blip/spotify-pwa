@@ -6,6 +6,7 @@ import Artists from "pages/artists";
 import Playlists from "pages/playlists";
 import Profile from "pages/profile";
 import PrivateRoute from "./PrivateRoute";
+import Albums from "pages/albums";
 
 export default function MainRoutes() {
     return (
@@ -13,7 +14,7 @@ export default function MainRoutes() {
             <Routes>
                 <Route path="/" element={<Login />} />
 
-                <Route path="/login" element={<Login />} />
+                <Route path="/login:access_token?" element={<Login />} />
                 <Route element={<Layout />}>
                     <Route
                         path="/home"
@@ -28,6 +29,14 @@ export default function MainRoutes() {
                         element={
                             <PrivateRoute>
                                 <Artists />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/albums"
+                        element={
+                            <PrivateRoute>
+                                <Albums />
                             </PrivateRoute>
                         }
                     />

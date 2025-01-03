@@ -10,10 +10,9 @@ export async function api(url: string, options?: AxiosRequestConfig) {
         });
 
         instanceApi.interceptors.request.use(function (config) {
-            const token = localStorage.getItem("spotifyToken");
-            config.headers.Authorization = token
-                ? `Bearer ${JSON.parse(token!)}`
-                : "";
+            const token = localStorage.getItem("token");
+            console.log("JSON.parse(token!)", token);
+            config.headers.Authorization = token ? `Bearer ${token}` : "";
             return config;
         });
 
