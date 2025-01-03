@@ -42,11 +42,19 @@ export const Button = styled.button`
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: ${(props) => props.theme.greenPrimary};
     color: white;
     margin-top: 2em;
     &:disabled {
-        background-color: #cccccc;
+        background-color: ${(props) => props.theme.grayLight};
         cursor: not-allowed;
     }
+`;
+
+export const Header = styled.header`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
 `;

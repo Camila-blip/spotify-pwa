@@ -3,8 +3,12 @@ import { ContentContainer } from "./style";
 
 type ContainerProps = {
     children: ReactNode | JSX.Element;
+    bottom?: string;
 };
 
-export default function Container({ children }: ContainerProps): JSX.Element {
-    return <ContentContainer>{children}</ContentContainer>;
+export default function Container({
+    children,
+    bottom
+}: ContainerProps): JSX.Element {
+    return <ContentContainer bottom={bottom}>{children}</ContentContainer>;
 }

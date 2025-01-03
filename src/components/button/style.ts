@@ -12,4 +12,6 @@ export const ContentButton = styled.button<{
     font-size: 1rem;
     font-weight: 700;
     font-family: "Rubik", sans-serif;
+    line-height: 20px;
+    letter-spacing: 0.16px;
 `;

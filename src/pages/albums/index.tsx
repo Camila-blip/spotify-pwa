@@ -1,9 +1,10 @@
 import { ArrowLeft } from "assets/icons";
 import { useMusicStore } from "context/Music.context";
-import { ContentTitle, Header, Title } from "./style";
+import { ContentTitle, Title } from "./style";
 import {
     Button,
     ContentContainer,
+    Header,
     Image,
     Subtitle,
     TitleItens
@@ -21,19 +22,19 @@ type typeAlbums = {
 
 export default function Albums() {
     const { artists } = useMusicStore();
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState<number>(0);
     const limit = 5;
     const offset = page * limit;
     const router = useNavigate();
-    console.log("artistsartists", artists);
+
     const { listAlbums, refetchlistAlbums } = useGetAlbums(
         artists[0].id,
         limit,
         offset
     );
-    const handleNextPage = async () => {
+
+    const handleNextPage = () => {
         setPage((prevPage) => prevPage + 1);
-        await refetchlistAlbums();
     };
 
     const handlePreviousPage = () => {
@@ -80,13 +81,13 @@ export default function Albums() {
             </ContentContainer>
             <ContentContainer direction="row" gap={10}>
                 <Button onClick={handlePreviousPage} disabled={page === 0}>
-                    Previous
+                    Anterior
                 </Button>
                 <Button
                     onClick={handleNextPage}
-                    disabled={listAlbums?.total < page}
+                    disabled={listAlbums?.total <= (page + 1) * limit}
                 >
-                    Next
+                    Proximo
                 </Button>
             </ContentContainer>
         </>

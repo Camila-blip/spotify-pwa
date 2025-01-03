@@ -20,7 +20,6 @@ export default function Artists() {
     const { listArtists } = useGetArtists();
     const { setArtists } = useMusicStore();
     const router = useNavigate();
-    console.log(listArtists);
     return (
         <>
             <Title.Container>

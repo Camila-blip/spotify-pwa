@@ -6,5 +6,6 @@ export default {
     bonyBlack: "#181414",
     backgroundColor: "#090707",
     greenPrimary: "#57B660",
-    grayDark: "#303030"
+    grayDark: "#303030",
+    grayLight: "#cccccc"
 };

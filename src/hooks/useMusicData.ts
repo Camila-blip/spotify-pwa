@@ -32,3 +32,18 @@ export function useGetAlbums(id: string, limit: number, offset: number) {
         isLoadinglistAlbums
     };
 }
+
+export function useGetPlaylists(limit: number, offset: number) {
+    const {
+        data: listPlaylists,
+        refetch: refetchlistPlaylists,
+        isFetching: isLoadinglistPlaylists
+    } = useQuery(["listPlaylists", limit, offset], () =>
+        api(`me/playlists?limit=${limit}&offset=${offset}`)
+    );
+    return {
+        listPlaylists,
+        refetchlistPlaylists,
+        isLoadinglistPlaylists
+    };
+}

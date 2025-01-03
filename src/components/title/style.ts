@@ -12,9 +12,9 @@ export const ContentDescription = styled.strong`
     line-height: 18px;
 `;
 
-export const ContentContainer = styled.div`
+export const ContentContainer = styled.div<{ bottom?: string }>`
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 2em;
+    margin-bottom: ${({ bottom }) => (bottom ? bottom : "2em")};
 `;
