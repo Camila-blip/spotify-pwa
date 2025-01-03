@@ -28,13 +28,14 @@ export default [
             "linebreak-style": ["error", "unix"],
             quotes: ["error", "double"],
             semi: ["error", "always"],
-            "react/prop-types": "off",
+            "react/prop-types": "error",
             "@typescript-eslint/no-explicit-any": "error",
             "react/no-unknown-property": "off",
             "react/display-name": "off",
             "react/no-unescaped-entities": "off",
             "@typescript-eslint/no-namespace": "off",
-            "@typescript-eslint/no-non-null-assertion": "off"
+            "@typescript-eslint/no-non-null-assertion": "off",
+            "no-console": ["error", { allow: ["warn", "error"] }]
         },
         settings: {
             react: {

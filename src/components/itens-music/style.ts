@@ -24,7 +24,7 @@ export const TitleItens = styled.h3`
     font-family: "Rubik", sans-serif;
     font-weight: 400;
     line-height: 20px;
-    letter-spacing: 1px;
+    letter-spacing: 0.16px;
     cursor: pointer;
 `;
 
@@ -33,7 +33,7 @@ export const Subtitle = styled.span`
     font-family: "Rubik", sans-serif;
     font-weight: 400;
     line-height: 20px;
-    letter-spacing: 1px;
+    letter-spacing: 0.16px;
 `;
 
 export const Button = styled.button`

@@ -7,9 +7,11 @@ import {
     Button as ButtonPagination,
     Subtitle
 } from "components/itens-music/style";
+import Modal from "components/modal";
 import { Title } from "components/title";
-import { useGetPlaylists } from "hooks/useMusicData";
-import { useState } from "react";
+import { useMusicStore } from "context/Music.context";
+import { useCreatePlaylist, useGetPlaylists } from "hooks/useMusicData";
+import { useEffect, useState } from "react";
 
 type typePlaylist = {
     id: string;
@@ -23,6 +25,10 @@ export default function Playlists() {
     const limit = 5;
     const offset = page * limit;
     const { listPlaylists } = useGetPlaylists(limit, offset);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [newPlaylist, setNewPlaylist] = useState<string>("");
+    const { mutate, isLoading, isSuccess } = useCreatePlaylist();
+    const { user } = useMusicStore();
 
     const handleNextPage = async () => {
         setPage((prevPage) => prevPage + 1);
@@ -39,6 +45,20 @@ export default function Playlists() {
         return text;
     };
 
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        mutate({ name: newPlaylist, id: user?.id });
+    };
+
+    useEffect(() => {
+        if (isSuccess) {
+            handleCloseModal();
+        }
+    }, [isSuccess]);
     return (
         <>
             <Header>
@@ -46,30 +66,40 @@ export default function Playlists() {
                     <Title.H1 title="Minhas Playlists" />
                     <Title.Description description="Sua coleção pessoal de playlists" />
                 </Title.Container>
-                <Button text="Criar playlist" />
+                <Button
+                    text="Criar playlist"
+                    onClick={() => setIsModalOpen(true)}
+                />
             </Header>
             <ContentContainer>
-                {listPlaylists?.items?.map((playlist: typePlaylist) => {
-                    return (
-                        <ContentContainer
-                            align="center"
-                            direction={"row"}
-                            key={playlist.id}
-                        >
-                            <Image
-                                src={playlist?.images[0]?.url}
-                                alt={playlist?.name}
-                            />
-                            <ContentContainer>
-                                <TitleItens>{playlist?.name}</TitleItens>
-                                <Subtitle>
-                                    {" "}
-                                    {truncateText(playlist?.description, 15)}
-                                </Subtitle>
+                {listPlaylists?.items &&
+                    listPlaylists?.items?.map((playlist: typePlaylist) => {
+                        return (
+                            <ContentContainer
+                                align="center"
+                                direction={"row"}
+                                key={playlist.id}
+                            >
+                                {playlist?.images && (
+                                    <Image
+                                        src={playlist?.images[0]?.url}
+                                        alt={playlist?.name}
+                                    />
+                                )}
+
+                                <ContentContainer>
+                                    <TitleItens>{playlist?.name}</TitleItens>
+                                    <Subtitle>
+                                        {" "}
+                                        {truncateText(
+                                            playlist?.description,
+                                            15
+                                        )}
+                                    </Subtitle>
+                                </ContentContainer>
                             </ContentContainer>
-                        </ContentContainer>
-                    );
-                })}
+                        );
+                    })}
             </ContentContainer>
             <ContentContainer direction="row" gap={10}>
                 <ButtonPagination
@@ -85,6 +115,15 @@ export default function Playlists() {
                     Proximo
                 </ButtonPagination>
             </ContentContainer>
+            {isModalOpen && (
+                <Modal
+                    onClose={handleCloseModal}
+                    newPlaylist={newPlaylist}
+                    setNewPlaylist={setNewPlaylist}
+                    handleSubmit={handleSubmit}
+                    disabled={isLoading}
+                />
+            )}
         </>
     );
 }

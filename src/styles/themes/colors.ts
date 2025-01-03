@@ -7,5 +7,6 @@ export default {
     backgroundColor: "#090707",
     greenPrimary: "#57B660",
     grayDark: "#303030",
-    grayLight: "#cccccc"
+    grayLight: "#cccccc",
+    whiteTranslucent: "#FFFFFF33"
 };

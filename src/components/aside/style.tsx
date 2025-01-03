@@ -24,7 +24,7 @@ export const Title = styled.span`
     color: ${(props) => props.theme.gray500};
     font-weight: 700;
     line-height: 24.74px;
-    letter-spacing: -6%;
+    letter-spacing: -0.96px;
     transition: transform 0.6s ease-in-out;
     font-size: 1.1875rem;
 `;

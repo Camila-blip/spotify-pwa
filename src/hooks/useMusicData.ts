@@ -1,5 +1,10 @@
 import { api } from "api/api";
-import { useQuery } from "react-query";
+import {
+    useMutation,
+    useQuery,
+    QueryClient,
+    useQueryClient
+} from "react-query";
 
 export function useGetArtists() {
     const {
@@ -45,5 +50,37 @@ export function useGetPlaylists(limit: number, offset: number) {
         listPlaylists,
         refetchlistPlaylists,
         isLoadinglistPlaylists
+    };
+}
+
+export function useCreatePlaylist() {
+    const queryClient = useQueryClient();
+    return useMutation(
+        ({ id, name }: { id: string; name: string }) =>
+            api(`users/${id}/playlists`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify({ name })
+            }),
+        {
+            onSuccess: () => {
+                queryClient.refetchQueries("listPlaylists");
+            }
+        }
+    );
+}
+
+export function useGetUser() {
+    const {
+        data: listUser,
+        refetch: refetchlistUser,
+        isFetching: isLoadinglistUser
+    } = useQuery(["listUser"], () => api("me"));
+    return {
+        listUser,
+        refetchlistUser,
+        isLoadinglistUser
     };
 }
