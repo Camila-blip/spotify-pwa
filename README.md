@@ -19,6 +19,6 @@
 - [ ] Testes E2E
 - [ ] Integração com Sentry
 - [x] CI/CD
-- [ ] Responsividade (celular e tablet)
+- [x] Responsividade (celular e tablet)
 - [x] Qualidade de código (Sonarqube)
 - [ ] PWA

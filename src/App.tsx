@@ -1,6 +1,8 @@
 import { ThemeProvider } from "styled-components";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { Helmet } from "react-helmet";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+
+import { QueryClient } from "@tanstack/react-query";
 import theme from "styles/themes/colors";
 import GlobalStyle from "styles";
 import MainRoutes from "routes";
@@ -10,24 +12,28 @@ export default function App() {
     const queryClient = new QueryClient({
         defaultOptions: {
             queries: {
-                refetchOnWindowFocus: false
+                refetchOnWindowFocus: false,
+                staleTime: 1000 * 60 * 60 * 24 // 24 hours
             }
         }
     });
 
+    const persister = createSyncStoragePersister({
+        storage: window.localStorage
+    });
+
     return (
         <>
-            <Helmet>
-                <title>Spotify PWA</title>
-                <meta name="description" content="Spotify artistas." />
-            </Helmet>
-            <QueryClientProvider client={queryClient}>
+            <PersistQueryClientProvider
+                client={queryClient}
+                persistOptions={{ persister }}
+            >
                 <ThemeProvider theme={theme}>
                     <GlobalStyle />
                     <ToastContainer autoClose={1000} />
                     <MainRoutes />
                 </ThemeProvider>
-            </QueryClientProvider>
+            </PersistQueryClientProvider>
         </>
     );
 }

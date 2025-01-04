@@ -45,16 +45,31 @@ registerRoute(
     createHandlerBoundToURL(process.env.PUBLIC_URL + "/index.html")
 );
 
-// An example runtime caching route for requests that aren't handled by the
-// precache, in this case same-origin .png requests like those from in public/
+// Cache images from the Spotify API
 registerRoute(
-    // Add in any other file extensions or routing criteria as needed.
-    ({ url }) =>
-        url.origin === self.location.origin && url.pathname.endsWith(".png"),
-    // Customize this strategy as needed, e.g., by changing to CacheFirst.
-    new StaleWhileRevalidate({
-        cacheName: "images",
-        plugins: [new ExpirationPlugin({ maxEntries: 50 })]
+    ({ url }) => url.origin === "https://i.scdn.co",
+    new CacheFirst({
+        cacheName: "spotify-images",
+        plugins: [
+            new ExpirationPlugin({
+                maxEntries: 50,
+                maxAgeSeconds: 7 * 24 * 60 * 60 // 7 days
+            })
+        ]
+    })
+);
+
+// Cache images from the Facebook platform
+registerRoute(
+    ({ url }) => url.origin === "https://platform-lookaside.fbsbx.com",
+    new CacheFirst({
+        cacheName: "facebook-images",
+        plugins: [
+            new ExpirationPlugin({
+                maxEntries: 50,
+                maxAgeSeconds: 7 * 24 * 60 * 60 // 7 days
+            })
+        ]
     })
 );
 
