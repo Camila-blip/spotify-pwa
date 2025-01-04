@@ -9,6 +9,7 @@ export const ContentContainer = styled.div<{
     flex-direction: ${({ direction }) => (direction ? "row" : "column")};
     gap: ${({ gap }) => (gap ? gap : 16)}px;
     align-items: ${({ align }) => (align ? align : "start")};
+    text-align: left;
 `;
 
 export const Image = styled.img<{ border?: boolean }>`
@@ -44,7 +45,7 @@ export const Button = styled.button`
     border-radius: 5px;
     background-color: ${(props) => props.theme.greenPrimary};
     color: white;
-    margin-top: 2em;
+    margin: 2em 0;
     &:disabled {
         background-color: ${(props) => props.theme.grayLight};
         cursor: not-allowed;
@@ -57,4 +58,6 @@ export const Header = styled.header`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2em;
+    gap: 20px;
+    flex-wrap: wrap;
 `;

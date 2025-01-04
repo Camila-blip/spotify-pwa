@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { tabletMediaQuery } from "styles/themes/mediaQueries";
 
 export const AsideContent = styled.aside`
     height: 100%;
@@ -8,6 +9,13 @@ export const AsideContent = styled.aside`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    ${tabletMediaQuery} {
+        width: 85px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+    }
 `;
 
 export const Content = styled.div`
@@ -17,6 +25,16 @@ export const Content = styled.div`
     img {
         width: 164px;
         height: 49.06px;
+        ${tabletMediaQuery} {
+            overflow: hidden;
+            object-fit: cover;
+            object-position: left;
+            width: 80px;
+            height: auto;
+        }
+    }
+    ${tabletMediaQuery} {
+        overflow: hidden;
     }
 `;
 
@@ -27,6 +45,9 @@ export const Title = styled.span`
     letter-spacing: -0.96px;
     transition: transform 0.6s ease-in-out;
     font-size: 1.1875rem;
+    ${tabletMediaQuery} {
+        display: none;
+    }
 `;
 
 export const MenuOption = styled.div<{ active: boolean }>`
@@ -83,7 +104,14 @@ export const ButtonPWA = styled.button`
     align-items: center;
     font-size: 1.1875rem;
     font-weight: 700;
-
+    ${tabletMediaQuery} {
+        width: 30px;
+    }
+    ${tabletMediaQuery} {
+        span {
+            display: none;
+        }
+    }
     svg {
         margin-top: -2px;
     }

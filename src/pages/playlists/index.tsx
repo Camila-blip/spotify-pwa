@@ -10,7 +10,11 @@ import {
 import Modal from "components/modal";
 import { Title } from "components/title";
 import { useMusicStore } from "context/Music.context";
-import { useCreatePlaylist, useGetPlaylists } from "hooks/useMusicData";
+import {
+    useCreatePlaylist,
+    useGetPlaylists,
+    useGetUser
+} from "hooks/useMusicData";
 import { useEffect, useState } from "react";
 
 type typePlaylist = {
@@ -28,8 +32,8 @@ export default function Playlists() {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [newPlaylist, setNewPlaylist] = useState<string>("");
     const { mutate, isLoading, isSuccess } = useCreatePlaylist();
-    const { user } = useMusicStore();
-
+    const { user, setUser } = useMusicStore();
+    const { listUser } = useGetUser();
     const handleNextPage = async () => {
         setPage((prevPage) => prevPage + 1);
     };
@@ -51,8 +55,11 @@ export default function Playlists() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        mutate({ name: newPlaylist, id: user?.id });
+        mutate({ name: newPlaylist, id: user ? user.id : listUser.id });
     };
+    useEffect(() => {
+        !user && setUser(listUser);
+    }, [listUser]);
 
     useEffect(() => {
         if (isSuccess) {

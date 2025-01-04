@@ -14,15 +14,15 @@ type Music = {
     user: {
         id: string;
         display_name: string;
-        images: {
-            url: string;
-        }[];
-    };
-    setUser: (user: {
         images: { url: string }[];
-        display_name: string;
-        id: string;
-    }) => void;
+    } | null;
+    setUser: (
+        user: {
+            images: { url: string }[];
+            display_name: string;
+            id: string;
+        } | null
+    ) => void;
 };
 
 export const useMusicStore = create<Music>((set) => ({

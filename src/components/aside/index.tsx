@@ -48,7 +48,7 @@ export default function Aside() {
             </Content>
             <ButtonPWA>
                 <GrommetIconsInstallOption />
-                Instalar PWA
+                <span>Instalar PWA</span>
             </ButtonPWA>
         </AsideContent>
     );
