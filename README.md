@@ -6,13 +6,13 @@
 
 - [x] Seguimentação de commits
 - [x] Lint
-- [X] Autenticação via Spotify
-- [X] Listar artistas
-- [X] Listar albuns de um artista
-- [X] Utilizar paginação (scroll infinito ou não)
-- [ ] Funcionamento offline
+- [x] Autenticação via Spotify
+- [x] Listar artistas
+- [x] Listar albuns de um artista
+- [x] Utilizar paginação (scroll infinito ou não)
+- [x] Funcionamento offline
 - [ ] Testes unitários
-- [X] Deploy da aplicação
+- [x] Deploy da aplicação
 
 ## Bônus
 
