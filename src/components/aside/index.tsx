@@ -30,12 +30,10 @@ export default function Aside() {
 
     useEffect(() => {
         const handler = (e: Event) => {
-            console.log("dentrohandle");
             e.preventDefault();
             setDeferredPrompt(e);
             setIsInstallable(true);
         };
-        console.log("effect");
 
         window.addEventListener("beforeinstallprompt", handler);
 
@@ -45,17 +43,12 @@ export default function Aside() {
     }, []);
 
     const handleInstallClick = async () => {
-        console.log("aqui");
-        console.log("deferredPrompt", deferredPrompt);
         if (deferredPrompt) {
-            console.log("dentro");
             const promptEvent = deferredPrompt as BeforeInstallPromptEvent;
             promptEvent.prompt();
             const { outcome } = await promptEvent.userChoice;
             if (outcome === "accepted") {
-                console.log("User accepted the install prompt");
             } else {
-                console.log("User dismissed the install prompt");
             }
             setDeferredPrompt(null);
             setIsInstallable(false);
