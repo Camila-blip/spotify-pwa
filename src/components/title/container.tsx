@@ -10,5 +10,5 @@ export default function Container({
     children,
     bottom
 }: ContainerProps): JSX.Element {
-    return <ContentContainer bottom={bottom}>{children}</ContentContainer>;
+    return <ContentContainer style={{ bottom }}>{children}</ContentContainer>;
 }

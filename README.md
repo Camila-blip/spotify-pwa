@@ -1,4 +1,4 @@
-"node": "20.9.0"
+"node": "20.18.1"
 
 # Requisitos
 
@@ -21,4 +21,4 @@
 - [x] CI/CD
 - [x] Responsividade (celular e tablet)
 - [x] Qualidade de código (Sonarqube)
-- [ ] PWA
+- [x] PWA

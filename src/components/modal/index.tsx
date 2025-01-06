@@ -15,16 +15,18 @@ export default function Modal({
     disabled?: boolean;
 }) {
     return (
-        <S.ContainerModal>
+        <S.ContainerModal role="dialog" aria-labelledby="modal-title">
             <S.ExternalModal>
                 <S.Modal>
                     <S.Header>
-                        <S.ButtonClose onClick={onClose}>
+                        <S.ButtonClose onClick={onClose} aria-label="Close">
                             <Close />
                         </S.ButtonClose>
                     </S.Header>
                     <S.Content onSubmit={handleSubmit}>
-                        <S.Label>Dê um nome a sua playlist</S.Label>
+                        <S.Label id="modal-title">
+                            Dê um nome a sua playlist
+                        </S.Label>
                         <S.ContentInput>
                             <S.Input
                                 required

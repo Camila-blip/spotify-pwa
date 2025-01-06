@@ -12,11 +12,7 @@ export default function Button({
     ...rest
 }: typeButton): JSX.Element {
     return (
-        <ContentButton
-            {...rest}
-            backgroundColor={backgroundColor}
-            color={color}
-        >
+        <ContentButton {...rest} style={{ backgroundColor, color }}>
             {text}
         </ContentButton>
     );
