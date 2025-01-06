@@ -72,6 +72,8 @@ export default function Aside() {
                                 active={
                                     location.pathname.replace("/", "") ===
                                     item.url
+                                        ? true
+                                        : undefined
                                 }
                             >
                                 {item.icon}

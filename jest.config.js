@@ -3,7 +3,8 @@ export default {
     testEnvironment: "jsdom",
     moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
     transform: {
-        "^.+\\.(ts|tsx)$": "ts-jest"
+        "^.+\\.(ts|tsx)$": "ts-jest",
+        "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js"
     },
     transformIgnorePatterns: ["<rootDir>/node_modules/"],
     testMatch: [
@@ -23,6 +24,7 @@ export default {
         "^hooks/(.*)$": "<rootDir>/src/hooks/$1",
         "^context/(.*)$": "<rootDir>/src/context/$1",
         "^api/(.*)$": "<rootDir>/src/api/$1",
+        "^pages/(.*)$": "<rootDir>/src/pages/$1",
         "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js"
     }
 };

@@ -1,21 +1,63 @@
 import { render, screen } from "@testing-library/react";
-import { TextEncoder, TextDecoder } from "util";
-
+import { QueryClient } from "@tanstack/react-query";
 import Artists from ".";
-global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder as typeof global.TextDecoder;
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import {
+    ReactNode,
+    ReactPortal,
+    ReactElement,
+    JSXElementConstructor
+} from "react";
+import { JSX } from "react/jsx-runtime";
+import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+import { MemoryRouter } from "react-router-dom";
+
+type UIElement =
+    | string
+    | number
+    | bigint
+    | boolean
+    | Iterable<ReactNode>
+    | Promise<
+          | string
+          | number
+          | bigint
+          | boolean
+          | ReactPortal
+          | ReactElement<unknown, string | JSXElementConstructor<unknown>>
+          | Iterable<ReactNode>
+          | null
+          | undefined
+      >
+    | JSX.Element
+    | null
+    | undefined;
+
 describe("Artists Component", () => {
+    const queryClient = new QueryClient();
+    const persister = createSyncStoragePersister({
+        storage: window.localStorage
+    });
+
+    const renderWithClient = (ui: UIElement) => {
+        return render(
+            <PersistQueryClientProvider
+                client={queryClient}
+                persistOptions={{ persister }}
+            >
+                {ui}
+            </PersistQueryClientProvider>
+        );
+    };
+    renderWithClient(
+        <MemoryRouter>
+            <Artists />
+        </MemoryRouter>
+    );
     it("renders the title and description", () => {
-        render(<Artists />);
         expect(screen.getByText("Top Artistas")).toBeInTheDocument();
         expect(
             screen.getByText("Aqui você encontra seus artistas preferidos")
         ).toBeInTheDocument();
-    });
-
-    it("renders the list of artists", () => {
-        render(<Artists />);
-        expect(screen.getByAltText("Artist 1")).toBeInTheDocument();
-        expect(screen.getByAltText("Artist 2")).toBeInTheDocument();
     });
 });

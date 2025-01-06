@@ -50,7 +50,7 @@ export const Title = styled.span`
     }
 `;
 
-export const MenuOption = styled.div<{ active: boolean }>`
+export const MenuOption = styled.div<{ active?: boolean }>`
     display: flex;
     flex-direction: row;
     gap: 20px;

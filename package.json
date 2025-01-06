@@ -45,6 +45,7 @@
         "@babel/plugin-transform-react-jsx": "^7.23.4",
         "@commitlint/cli": "^19.6.1",
         "@commitlint/config-conventional": "^19.6.0",
+        "@sinonjs/text-encoding": "^0.7.3",
         "@testing-library/dom": "^10.4.0",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.1.0",
